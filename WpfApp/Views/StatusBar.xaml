@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="WpfApp.Views.StatusBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:WpfApp.Views"
+             xmlns:Behaviors="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:viewmodels="clr-namespace:WpfApp.ViewModels"
+             d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
+             mc:Ignorable="d"
+             d:DesignHeight="32" d:DesignWidth="800">
+    <StatusBar>
+        <StatusBarItem Visibility="Visible">
+            <TextBlock Text="{Binding Status}" />
+        </StatusBarItem>
+        <Separator />
+        <StatusBarItem Visibility="Visible">
+            <Label Content="This is another status" />
+        </StatusBarItem>
+        <Separator />
+        <StatusBarItem Visibility="Visible">
+            <StackPanel Orientation="Horizontal">
+                <CheckBox Content="Check me" IsChecked="True" VerticalAlignment="Center" />
+                <Label Content="Damned!!!" />
+                <TextBox Width="120" Text="This is a textbox" VerticalAlignment="Center" />
+            </StackPanel>
+        </StatusBarItem>
+        <Separator />
+        <StatusBarItem HorizontalAlignment="Right">
+            <Button Content="About..."/>
+        </StatusBarItem>
+    </StatusBar>
+</UserControl>

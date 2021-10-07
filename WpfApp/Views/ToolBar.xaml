@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="WpfApp.Views.ToolBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:WpfApp.Views"
+             xmlns:Behaviors="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:viewmodels="clr-namespace:WpfApp.ViewModels"
+             d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
+             mc:Ignorable="d"
+             d:DesignHeight="40" d:DesignWidth="800">
+    <DockPanel>
+        <ToolBarTray DockPanel.Dock="Top">
+            <ToolBar>
+                <Button Content="People" Width="120" Height="32" Command="{Binding PeopleViewCommand}" />
+            </ToolBar>
+            <ToolBar>
+                <Button Content="User" Width="120" Height="32" Command="{Binding UserViewCommand}"/>
+                <Button Content="Person" Width="120" Height="32" Command="{Binding PersonViewCommand}" />
+                <Button Content="Graphs" Width="120" Height="32" Command="{Binding GraphViewCommand}" />
+            </ToolBar>
+        </ToolBarTray>
+    </DockPanel>
+</UserControl>

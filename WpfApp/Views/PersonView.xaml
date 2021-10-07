@@ -1,0 +1,125 @@
+﻿<UserControl x:Class="WpfApp.Views.PersonView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:WpfApp.Views"
+             xmlns:Behaviors="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:converters="clr-namespace:WpfApp.Converters"
+             xmlns:validators="clr-namespace:WpfApp.Validators"
+             xmlns:viewmodels="clr-namespace:WpfApp.ViewModels"
+             d:DataContext="{d:DesignInstance Type=viewmodels:PersonViewModel}"
+             mc:Ignorable="d"
+             d:DesignHeight="400" d:DesignWidth="400">
+
+    <TabControl TabStripPlacement="Top">
+        <TabItem Header="All info" IsSelected="True">
+            <StackPanel Orientation="Vertical">
+                <!--En TabItem kan innehålla en egen UserControl, den ärver ju binding från sin parent-->
+                <Expander>
+                    <!--En Expander är till för att dölja en StackPanel eller en UserControl eller liknande-->
+                    <Expander.Header>Name information</Expander.Header>
+                    <StackPanel Orientation="Vertical">
+                        <Label Content="SSN:" />
+                        <TextBox Style="{StaticResource CustomErrorControlOnErrorStyle}">
+                            <TextBox.Text>
+                                <Binding Path="Person.Ssn" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
+                                    <Binding.ValidationRules>
+                                        <validators:SsnValidatorRule ValidatesOnTargetUpdated="True" />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                        <Label Content="Firstname:" />
+                        <TextBox Text="{Binding Path=Person.Firstname}" />
+                        <Label Content="Lastname:" />
+                        <TextBox Text="{Binding Path=Person.Lastname}" />
+                    </StackPanel>
+                </Expander>
+                <Expander>
+                    <!--En Expander är till för att dölja en StackPanel eller en UserControl eller liknande-->
+                    <Expander.Header>Address information</Expander.Header>
+                    <StackPanel Orientation="Vertical">
+                        <Label Content="Street:" />
+                        <TextBox Text="{Binding Path=Person.Address}" />
+                        <Label Content="Postal code:" />
+                        <TextBox Text="{Binding Path=Person.Postalcode}" />
+                        <Label Content="City:" />
+                        <TextBox Text="{Binding Path=Person.City}" />
+                    </StackPanel>
+                </Expander>
+                <Expander>
+                    <Expander.Header>Contact information</Expander.Header>
+                    <StackPanel Orientation="Vertical">
+                        <Label Content="Email:" />
+                        <TextBox Style="{StaticResource CustomErrorControlOnErrorStyle}">
+                            <TextBox.Text>
+                                <Binding Path="Person.Email" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
+                                    <Binding.ValidationRules>
+                                        <validators:EmailValidatorRule ValidatesOnTargetUpdated="True" />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                        <Label Content="Telephone:" />
+                        <TextBox Text="{Binding Path=Person.Telephone}" />
+                    </StackPanel>
+                </Expander>
+            </StackPanel>
+        </TabItem>
+        <TabItem Header="Name info">
+            <StackPanel Orientation="Vertical">
+                <Label Content="SSN:" />
+                <TextBox Style="{StaticResource CustomErrorControlOnErrorStyle}">
+                    <TextBox.Text>
+                        <Binding Path="Person.Ssn" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
+                            <Binding.ValidationRules>
+                                <validators:SsnValidatorRule ValidatesOnTargetUpdated="True" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <Label Content="Firstname:" />
+                <TextBox Text="{Binding Path=Person.Firstname}" />
+                <Label Content="Lastname:" />
+                <TextBox Text="{Binding Path=Person.Lastname}" />
+            </StackPanel>
+        </TabItem>
+        <TabItem Header="Address info">
+            <StackPanel Orientation="Vertical">
+                <Label Content="Street:" />
+                <TextBox Text="{Binding Path=Person.Address}" />
+                <Label Content="Postal code:" />
+                <TextBox Text="{Binding Path=Person.Postalcode}" />
+                <Label Content="City:" />
+                <TextBox Text="{Binding Path=Person.City}" />
+            </StackPanel>
+        </TabItem>
+        <TabItem Header="Contact info">
+            <StackPanel Orientation="Vertical">
+                <Label Content="Email:" />
+                <TextBox Style="{StaticResource CustomErrorControlOnErrorStyle}">
+                    <TextBox.Text>
+                        <Binding Path="Person.Email" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
+                            <Binding.ValidationRules>
+                                <validators:EmailValidatorRule ValidatesOnTargetUpdated="True" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <Label Content="Telephone:" />
+                <TextBox Text="{Binding Path=Person.Telephone}" />
+            </StackPanel>
+        </TabItem>
+        <TabItem Header="Converters">
+            <StackPanel Orientation="Vertical">
+                <CheckBox Content="Adult or Child" IsChecked="{Binding Person.IsAdult, Converter={StaticResource adultConverter}}"/>
+                <TextBlock Text="{Binding Person.IsAdult}" Style="{StaticResource DefaultTextBlockStyle}"/>
+                <CheckBox Content="Yes or No" IsChecked="{Binding Person.IsYes, Converter={StaticResource yesNoConverter}}"/>
+                <TextBlock Text="{Binding Person.IsYes}" Style="{StaticResource DefaultTextBlockStyle}"/>
+                <CheckBox Content="True or False" IsChecked="{Binding Person.IsTrue, Converter={StaticResource trueFalseConverter}}"/>
+                <TextBlock Text="{Binding Person.IsTrue}" Style="{StaticResource DefaultTextBlockStyle}"/>
+            </StackPanel>
+        </TabItem>
+    </TabControl>
+</UserControl>
